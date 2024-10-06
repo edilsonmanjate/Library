@@ -8,7 +8,5 @@
         public string ISBN { get; set; }
         public int PublicationYear { get; set; }
 
-
-
     }
 }
