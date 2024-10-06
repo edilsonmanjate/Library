@@ -1,10 +1,12 @@
 ﻿using Library.API.Entities;
 using Library.API.Persistence;
 
+using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.API.Repositories
 {
+    
     public class BookRepository : IBookRepository
     {
         private readonly LibraryDbContext _context;
@@ -24,6 +26,11 @@ namespace Library.API.Repositories
 
         public async Task DeleteAsync(int id)
         {
+            if (await GetByIdAsync(id) == null)
+            {
+                throw new InvalidOperationException("Book not found");
+            }
+
             _context.Remove(await GetByIdAsync(id));
             await _context.SaveChangesAsync();
         }
@@ -40,6 +47,10 @@ namespace Library.API.Repositories
 
         public async Task UpdateAsync(Book book)
         {
+            if (await GetByIdAsync(book.Id) == null)
+            {
+                throw new InvalidOperationException("Book not found");
+            }
             _context.Update(book);
             await _context.SaveChangesAsync();
         }

@@ -2,11 +2,13 @@
 using Library.API.Repositories;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Library.API.Controllers
 {
     [ApiController]
     [Route("api/books")]
+    //[OutputCache]
     public class BooksController : ControllerBase
     {
         private IBookRepository _bookRepository;
@@ -35,30 +37,20 @@ namespace Library.API.Controllers
            await _bookRepository.CreateAsync(book);
         }
 
-        [HttpPut("{id}")]
+
+        [HttpPut]
         public async Task<IActionResult> UpdateBook(Book book)
         {
-            var existingBook = await _bookRepository.GetByIdAsync(book.Id);
-            if (existingBook == null)
-            {
-                return NotFound();
-            }
-            await _bookRepository.UpdateAsync(book);
+           await _bookRepository.UpdateAsync(book);
             return Ok("Book Upated");
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBook(int id)
         {
-            var existingBook = await _bookRepository.GetByIdAsync(id);
-            if (existingBook == null)
-            {
-                return NotFound();
-            }
             await _bookRepository.DeleteAsync(id);
             return Ok("Book Deleted");
         }
-
 
     }
 }
