@@ -8,15 +8,18 @@ namespace Library.API.Repositories
     public class BookRepository : IBookRepository
     {
         private readonly LibraryDbContext _context;
+        private readonly IConfiguration _configuration;
 
-        public BookRepository(LibraryDbContext context)
+        public BookRepository(LibraryDbContext context, IConfiguration configuration)
         {
             _context = context;
+            _configuration = configuration;
         }
 
         public async Task CreateAsync(Book book)
         {
             await _context.Books.AddAsync(book);
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(int id)
@@ -38,8 +41,8 @@ namespace Library.API.Repositories
         public async Task UpdateAsync(Book book)
         {
             _context.Update(book);
-
+            await _context.SaveChangesAsync();
         }
-   
+
     }
 }
