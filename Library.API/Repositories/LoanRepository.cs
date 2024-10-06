@@ -31,12 +31,18 @@ namespace Library.API.Repositories
 
         public async Task UpdateAsync(Loan loan)
         {
+            if (await GetByIdAsync(loan.Id) == null)
+                throw new InvalidOperationException("Loan not found");
+
             _context.Loans.Update(loan);
             await _context.SaveChangesAsync();
         }
 
         public async Task ReturnAsync(Loan loan, DateTime returnDate)
         {
+            if (await GetByIdAsync(loan.Id) == null)
+                throw new InvalidOperationException("Loan not found");
+
             loan.returnDate = returnDate;
             _context.Loans.Update(loan);
             await _context.SaveChangesAsync();
