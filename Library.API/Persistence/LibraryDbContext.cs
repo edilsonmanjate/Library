@@ -1,4 +1,5 @@
-﻿using Library.API.Entities;
+﻿
+using Library.Core.Entities;
 
 using Microsoft.EntityFrameworkCore;
 

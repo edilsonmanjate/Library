@@ -1,5 +1,5 @@
-﻿using Library.API.Entities;
-using Library.API.Repositories;
+﻿using Library.API.Repositories;
+using Library.Core.Entities;
 
 using Microsoft.AspNetCore.Mvc;
 

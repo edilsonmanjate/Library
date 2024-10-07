@@ -1,14 +1,14 @@
-﻿using Library.API.Entities;
+﻿using Library.Core.Entities;
 
 namespace Library.API.Repositories
 {
     public interface IBookRepository
     {
         Task<IEnumerable<Book>> GetAllAsync();
-        Task<Book> GetByIdAsync(int id);
+        Task<Book> GetByIdAsync(Guid id);
         Task CreateAsync(Book book);
         Task UpdateAsync(Book book);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Guid id);
 
     }
 }

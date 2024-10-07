@@ -1,5 +1,5 @@
-﻿using Library.API.Entities;
-using Library.API.Repositories;
+﻿using Library.API.Repositories;
+using Library.Core.Entities;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +23,7 @@ namespace Library.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Loan> GetLoan(int id)
+        public async Task<Loan> GetLoan(Guid id)
         {
             return await _loanRepository.GetByIdAsync(id);
 

@@ -1,10 +1,10 @@
-﻿using Library.API.Entities;
+﻿using Library.Core.Entities;
 
 namespace Library.API.Repositories
 {
     public interface ILoanRepository
     {
-        Task<Loan> GetByIdAsync(int id);
+        Task<Loan> GetByIdAsync(Guid id);
 
         Task<IEnumerable<Loan>> GetAllAsync();
         Task CreateAsync(Loan loan);

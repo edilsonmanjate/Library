@@ -1,5 +1,5 @@
-﻿using Library.API.Entities;
-using Library.API.Repositories;
+﻿using Library.API.Repositories;
+using Library.Core.Entities;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OutputCaching;
@@ -25,7 +25,7 @@ namespace Library.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Book> GetBook(int id)
+        public async Task<Book> GetBook(Guid id)
         {
             return await _bookRepository.GetByIdAsync(id);
 
@@ -46,7 +46,7 @@ namespace Library.API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(int id)
+        public async Task<IActionResult> DeleteBook(Guid id)
         {
             await _bookRepository.DeleteAsync(id);
             return Ok("Book Deleted");

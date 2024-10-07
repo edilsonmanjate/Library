@@ -1,5 +1,5 @@
-﻿using Library.API.Entities;
-using Library.API.Persistence;
+﻿using Library.API.Persistence;
+using Library.Core.Entities;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +14,7 @@ namespace Library.API.Repositories
             _context = context;
         }
 
-        public async Task<Loan?> GetByIdAsync(int id)
+        public async Task<Loan?> GetByIdAsync(Guid id)
         {
             return await _context.Loans.FindAsync(id);
         }
@@ -43,7 +43,8 @@ namespace Library.API.Repositories
             if (await GetByIdAsync(loan.Id) == null)
                 throw new InvalidOperationException("Loan not found");
 
-            loan.returnDate = returnDate;
+            loan.UpdateReturnDate(returnDate);
+
             _context.Loans.Update(loan);
             await _context.SaveChangesAsync();
         }

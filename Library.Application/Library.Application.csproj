@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\CreateBook\" />
+    <Folder Include="Commands\CreateLoan\" />
+    <Folder Include="Commands\CreateUser\" />
+    <Folder Include="Commands\DeleteBook\" />
+    <Folder Include="Commands\UpdateUser\" />
+    <Folder Include="Commands\UpdateLoan\" />
+    <Folder Include="Commands\UpdateBook\" />
+    <Folder Include="Commands\ReturnBook\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Services\" />
+    <Folder Include="Validators\" />
+    <Folder Include="Queries\GetBooks\" />
+    <Folder Include="Queries\GetBookById\" />
+    <Folder Include="Queries\GetLoans\" />
+    <Folder Include="Queries\GetLoanById\" />
+  </ItemGroup>
+
+</Project>

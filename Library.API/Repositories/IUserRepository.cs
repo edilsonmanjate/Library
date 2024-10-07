@@ -1,4 +1,4 @@
-﻿using Library.API.Entities;
+﻿using Library.Core.Entities;
 
 namespace Library.API.Repositories
 {

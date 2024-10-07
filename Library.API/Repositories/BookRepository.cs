@@ -1,12 +1,11 @@
-﻿using Library.API.Entities;
-using Library.API.Persistence;
+﻿using Library.API.Persistence;
+using Library.Core.Entities;
 
-using Microsoft.AspNetCore.OutputCaching;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.API.Repositories
 {
-    
+
     public class BookRepository : IBookRepository
     {
         private readonly LibraryDbContext _context;
@@ -24,7 +23,7 @@ namespace Library.API.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid id)
         {
             if (await GetByIdAsync(id) == null)
             {
@@ -40,7 +39,7 @@ namespace Library.API.Repositories
           return _context.Books.AsNoTracking();
         }
 
-        public async Task<Book?> GetByIdAsync(int id)
+        public async Task<Book?> GetByIdAsync(Guid id)
         {
             return await _context.Books.SingleOrDefaultAsync(b => b.Id == id);
         }

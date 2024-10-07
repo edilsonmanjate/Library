@@ -1,5 +1,5 @@
-﻿using Library.API.Entities;
-using Library.API.Persistence;
+﻿using Library.API.Persistence;
+using Library.Core.Entities;
 
 namespace Library.API.Repositories
 {
