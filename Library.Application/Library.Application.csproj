@@ -15,7 +15,7 @@
     <Folder Include="Commands\UpdateLoan\" />
     <Folder Include="Commands\UpdateBook\" />
     <Folder Include="Commands\ReturnBook\" />
-    <Folder Include="Dtos\" />
+    <Folder Include="DTOs\" />
     <Folder Include="Services\" />
     <Folder Include="Validators\" />
     <Folder Include="Queries\GetBooks\" />

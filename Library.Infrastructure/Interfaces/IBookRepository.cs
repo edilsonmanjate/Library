@@ -1,6 +1,7 @@
-﻿using Library.Core.Entities;
+﻿
+using Library.Core.Entities;
 
-namespace Library.API.Repositories
+namespace Library.Infrastructure.Interfaces
 {
     public interface IBookRepository
     {
