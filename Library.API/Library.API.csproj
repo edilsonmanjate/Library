@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Library.Application\Library.Application.csproj" />
     <ProjectReference Include="..\Library.core\Library.core.csproj" />
     <ProjectReference Include="..\Library.Infrastructure\Library.Infrastructure.csproj" />
   </ItemGroup>

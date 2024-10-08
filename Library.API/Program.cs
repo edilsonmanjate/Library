@@ -1,23 +1,15 @@
-using Library.API.Repositories;
-using Library.Infrastructure.Interfaces;
-using Library.Infrastructure.Persistence;
-
-using Microsoft.EntityFrameworkCore;
+using Library.Application;
+using Library.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 
+builder.Services
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
 
-builder.Services.AddScoped<IBookRepository, BookRepository>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ILoanRepository, LoanRepository>();
-
-builder.Services.AddDbContext<LibraryDbContext>(options =>
-{
-    options.UseInMemoryDatabase("Library");
-});
 
 builder.Services.AddOutputCache(options =>
 {

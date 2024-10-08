@@ -7,21 +7,29 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\CreateBook\" />
-    <Folder Include="Commands\CreateLoan\" />
-    <Folder Include="Commands\CreateUser\" />
-    <Folder Include="Commands\DeleteBook\" />
-    <Folder Include="Commands\UpdateUser\" />
-    <Folder Include="Commands\UpdateLoan\" />
-    <Folder Include="Commands\UpdateBook\" />
-    <Folder Include="Commands\ReturnBook\" />
-    <Folder Include="DTOs\" />
+    <Folder Include="Features\Commands\CreateBook\" />
+    <Folder Include="Features\Commands\CreateLoan\" />
+    <Folder Include="Features\Commands\DeleteBook\" />
+    <Folder Include="Features\Commands\UpdateUser\" />
+    <Folder Include="Features\Commands\UpdateLoan\" />
+    <Folder Include="Features\Commands\UpdateBook\" />
+    <Folder Include="Features\Commands\ReturnBook\" />
     <Folder Include="Services\" />
     <Folder Include="Validators\" />
-    <Folder Include="Queries\GetBooks\" />
-    <Folder Include="Queries\GetBookById\" />
-    <Folder Include="Queries\GetLoans\" />
-    <Folder Include="Queries\GetLoanById\" />
+    <Folder Include="Features\Queries\GetBooks\" />
+    <Folder Include="Features\Queries\GetBookById\" />
+    <Folder Include="Features\Queries\GetLoans\" />
+    <Folder Include="Features\Queries\GetLoanById\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="FluentValidation" Version="11.10.0" />
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Library.core\Library.core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
-﻿using Library.Core.Entities;
-using Library.Infrastructure.Interfaces;
+﻿using Library.Application.Repositories;
+using Library.Core.Entities;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,33 +17,34 @@ namespace Library.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Loan>> GetLoans()
+        public async Task<IEnumerable<Loan>> GetLoans(CancellationToken cancellationToken)
         {
-            return await _loanRepository.GetAllAsync();
+            return await _loanRepository.GetAll(cancellationToken);
         }
 
         [HttpGet("{id}")]
-        public async Task<Loan> GetLoan(Guid id)
+        public async Task<Loan> GetLoan(Guid id, CancellationToken cancellationToken)
         {
-            return await _loanRepository.GetByIdAsync(id);
+            return await _loanRepository.Get(id, cancellationToken);
 
         }
 
         [HttpPost]
         public async Task CreateLoan(Loan loan)
         {
-            await _loanRepository.CreateAsync(loan);
+            await _loanRepository.Create(loan);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         public async Task<IActionResult> UpdateLoan(Loan loan)
         {
-            var existingLoan = await _loanRepository.GetByIdAsync(loan.Id);
+            var cancellationToken = new CancellationToken();    
+            var existingLoan = await _loanRepository.Get(loan.Id, cancellationToken);
             if (existingLoan == null)
             {
                 return NotFound();
             }
-            await _loanRepository.UpdateAsync(loan);
+            await _loanRepository.Update(loan);
             return Ok("Loan Upated");
         }
 

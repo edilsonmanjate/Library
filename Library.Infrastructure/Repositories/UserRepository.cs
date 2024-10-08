@@ -1,22 +1,20 @@
-﻿using Library.Core.Entities;
-using Library.Infrastructure.Interfaces;
+﻿using Library.Application.Repositories;
+using Library.Core.Entities;
 using Library.Infrastructure.Persistence;
 
-namespace Library.API.Repositories
-{
-    public class UserRepository : IUserRepository
-    {
-        private LibraryDbContext _context;
+using Microsoft.EntityFrameworkCore;
 
-        public UserRepository(LibraryDbContext context)
+namespace Library.Infrastructure.Repositories
+{
+    public class UserRepository :  BaseRepository<User>, IUserRepository
+    {
+        public UserRepository(LibraryDbContext _context) : base(_context)
         {
-            _context = context;
         }
 
-        public async Task CreateAsync(User user)
+        public Task<User> GetByEmail(string email, CancellationToken cancellationToken)
         {
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+            return Context.Users.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
         }
     }
 }

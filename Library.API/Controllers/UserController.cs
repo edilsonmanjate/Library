@@ -1,5 +1,8 @@
-﻿using Library.Core.Entities;
-using Library.Infrastructure.Interfaces;
+﻿using Library.Application.DTOs;
+using Library.Application.Repositories;
+using Library.Core.Entities;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,16 +12,26 @@ namespace Library.API.Controllers
     [Route("api/User")]
     public class UserController : ControllerBase
     {
-        private IUserRepository _userRepository;
+        private readonly IMediator _mediator;
 
-        public UserController(IUserRepository userRepository)
+        public UserController(IMediator mediator)
         {
-            _userRepository = userRepository;
+            _mediator = mediator;
         }
+
+        //[HttpGet]
+        //public async Task<ActionResult<List<GetAllUserResponse>>> GetAll(CancellationToken cancellationToken)
+        //{
+        //    var response = await _mediator.Send(new Get(), cancellationToken);
+        //    return Ok(response);
+        //}
+
         [HttpPost]
-        public async Task CreateUser(User user)
+        public async Task<ActionResult<UserDto>> Create(userInputModel request,
+            CancellationToken cancellationToken)
         {
-            await _userRepository.CreateAsync(user);
+            var response = await _mediator.Send(request, cancellationToken);
+            return Ok(response);
         }
     }
 }

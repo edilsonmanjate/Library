@@ -1,5 +1,5 @@
-﻿using Library.Core.Entities;
-using Library.Infrastructure.Interfaces;
+﻿using Library.Application.Repositories;
+using Library.Core.Entities;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,36 +18,36 @@ namespace Library.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Book>> GetBooks()
+        public async Task<IEnumerable<Book>> GetBooks(CancellationToken cancellationToken)
         {
-            return await _bookRepository.GetAllAsync();
+            return await _bookRepository.GetAll(cancellationToken);
         }
 
         [HttpGet("{id}")]
-        public async Task<Book> GetBook(Guid id)
+        public async Task<Book> GetBook(Guid id, CancellationToken cancellationToken)
         {
-            return await _bookRepository.GetByIdAsync(id);
+            return await _bookRepository.Get(id,cancellationToken);
 
         }
 
         [HttpPost]
         public async Task CreateBook(Book book)
         {
-           await _bookRepository.CreateAsync(book);
+           await _bookRepository.Create(book);
         }
 
 
         [HttpPut]
         public async Task<IActionResult> UpdateBook(Book book)
         {
-           await _bookRepository.UpdateAsync(book);
+           await _bookRepository.Update(book);
             return Ok("Book Upated");
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(Guid id)
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBook(Book book)
         {
-            await _bookRepository.DeleteAsync(id);
+            await _bookRepository.Delete(book);
             return Ok("Book Deleted");
         }
 

@@ -23,6 +23,9 @@
         {
             IsDeleted = true;
         }
+        public void Update() {
+            CreatedAt = DateTime.Now;
+        }
 
 
     }
