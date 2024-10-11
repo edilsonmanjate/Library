@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
-using Library.Application.DTOs;
+
+using Library.Application.Common.Bases;
 using Library.Application.Repositories;
 using Library.Core.Entities;
 
 using MediatR;
 
-namespace Library.Application.Features.Users.Commands.CreateUser
+namespace Library.Application.Features.Users.Commands.CreateUserCreateUserCommand
 {
-    public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserDto>
+    public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, BaseResponse<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRepository _userRepository;
@@ -20,14 +21,24 @@ namespace Library.Application.Features.Users.Commands.CreateUser
             _mapper = mapper;
         }
 
-        public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<bool>> Handle(CreateUserCommand command, CancellationToken cancellationToken)
         {
-            var user = new User(request.Name, request.Name, DateTime.Now, request.Email);
+            var response = new BaseResponse<bool>();
+            try
+            {
+                var user = _mapper.Map<User>(command);
+                response.Data = await _userRepository.Create(user);
+                await _unitOfWork.Save(cancellationToken);
 
-            await _userRepository.Create(user);
-            await _unitOfWork.Save(cancellationToken);
-
-            return _mapper.Map<UserDto>(user);
+                if (response.Data)
+                    response.succcess = true;
+                response.Message = "Create succeed!";
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+            }
+            return response;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Library.Application.DTOs;
+using Library.Application.Features.Users.Commands.CreateUser;
 using Library.Application.Features.Users.Queries.GetUsers;
 
 using MediatR;
@@ -29,13 +30,19 @@ namespace Library.API.Controllers
 
             return BadRequest(response);
         }
-
         [HttpPost("Create")]
-        public async Task<ActionResult<UserDto>> Create(UserDto request,
-            CancellationToken cancellationToken)
+        public async Task<ActionResult> Create([FromBody] CreateUserCommand command, CancellationToken cancellationToken)
         {
-            var response = await _mediator.Send(request, cancellationToken);
-            return Ok(response);
+            if (command == null) return BadRequest();
+
+            var response = await _mediator.Send(command, cancellationToken);
+
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
         }
     }
 }

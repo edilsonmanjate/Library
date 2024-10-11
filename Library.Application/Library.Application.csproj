@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Features\Books\Queries\" />
     <Folder Include="Features\Books\Commands\ReturnBookCommand\" />
     <Folder Include="Features\Loans\Queries\GetLoanByUser\" />
-    <Folder Include="Services\" />
     <Folder Include="Features\Books\Queries\GetBooks\" />
     <Folder Include="Features\Books\Queries\GetBookById\" />
   </ItemGroup>
