@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 
 using Library.Application.DTOs;
-using Library.Application.Features.Users.Commands.CreateUser;
+using Library.Application.Features.Users.Commands.CreateUserCommand;
 using Library.Application.Features.Users.Commands.UpdateUserCommand;
 using Library.Core.Entities;
 

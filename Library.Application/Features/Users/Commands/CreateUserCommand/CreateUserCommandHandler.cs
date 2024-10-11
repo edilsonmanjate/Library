@@ -6,7 +6,7 @@ using Library.Core.Entities;
 
 using MediatR;
 
-namespace Library.Application.Features.Users.Commands.CreateUserCreateUserCommand
+namespace Library.Application.Features.Users.Commands.CreateUserCommand
 {
     public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, BaseResponse<bool>>
     {

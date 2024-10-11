@@ -8,7 +8,7 @@ namespace Library.Application.Features.Users.Commands.CreateUser
         public CreateUserValidator()
         {
             RuleFor(x => x.Email).NotEmpty().MaximumLength(50).EmailAddress();
-            RuleFor(x => x.Name).NotEmpty().MinimumLength(3).MaximumLength(50);
+            RuleFor(x => x.FullName).NotEmpty().MinimumLength(3).MaximumLength(50);
         }
     }
 }

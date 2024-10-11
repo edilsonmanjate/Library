@@ -23,7 +23,8 @@ namespace Library.Infrastructure
 
         private static IServiceCollection AddDb(this IServiceCollection services, string? connectionString)
         {
-            services.AddDbContext<LibraryDbContext>(options => options.UseSqlite(connectionString));
+            //services.AddDbContext<LibraryDbContext>(options => options.UseSqlite(connectionString));
+            services.AddDbContext<LibraryDbContext>(options => options.UseInMemoryDatabase("Library"));
 
             return services;
         }

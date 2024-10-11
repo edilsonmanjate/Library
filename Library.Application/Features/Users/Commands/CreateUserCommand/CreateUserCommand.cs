@@ -4,7 +4,7 @@ using Library.Core.Enums;
 
 using MediatR;
 
-namespace Library.Application.Features.Users.Commands.CreateUserCreateUserCommand
+namespace Library.Application.Features.Users.Commands.CreateUserCommand
 {
     public class CreateUserCommand : IRequest<BaseResponse<bool>>
     {

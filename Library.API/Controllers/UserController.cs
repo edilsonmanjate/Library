@@ -1,5 +1,5 @@
 ﻿using Library.Application.DTOs;
-using Library.Application.Features.Users.Commands.CreateUser;
+using Library.Application.Features.Users.Commands.CreateUserCommand;
 using Library.Application.Features.Users.Queries.GetUsers;
 
 using MediatR;

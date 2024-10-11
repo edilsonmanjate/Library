@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 
 using Library.Application.Common.Behavior;
-using Library.Application.Features.Users.Commands.CreateUser;
+using Library.Application.Features.Users.Commands.CreateUserCommand;
 
 
 
