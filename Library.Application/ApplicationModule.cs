@@ -1,5 +1,15 @@
-﻿using Library.Application.Features.Users.Commands.CreateUser;
+﻿using FluentValidation;
+
+using Library.Application.Common.Behavior;
+using Library.Application.Features.Users.Commands.CreateUser;
+
+
+
+using MediatR;
+
 using Microsoft.Extensions.DependencyInjection;
+
+using System.Reflection;
 
 namespace Library.Application
 {
@@ -9,7 +19,13 @@ namespace Library.Application
         {
             services
                 .AddAutoMapper(typeof(ApplicationModule))
-                .AddMediator();
+                .AddMediator()
+                .AddAutoMapper(Assembly.GetExecutingAssembly())
+                .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
+                .AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>))
+                .AddSingleton(typeof(IPipelineBehavior<,>), typeof(LoggingBehaviour<,>))
+                .AddSingleton(typeof(IPipelineBehavior<,>), typeof(PerformanceBehaviour<,>));
+            ;
 
             return services;
         }

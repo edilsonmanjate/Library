@@ -27,7 +27,7 @@ namespace Library.API.Controllers
         //}
 
         [HttpPost]
-        public async Task<ActionResult<UserDto>> Create(userInputModel request,
+        public async Task<ActionResult<UserDto>> Create(UserDto request,
             CancellationToken cancellationToken)
         {
             var response = await _mediator.Send(request, cancellationToken);

@@ -3,7 +3,7 @@ using Library.Application.DTOs;
 
 namespace Library.Application.Features.Users.Commands.CreateUser
 {
-    public sealed class CreateUserValidator : AbstractValidator<userInputModel>
+    public class CreateUserValidator : AbstractValidator<UserDto>
     {
         public CreateUserValidator()
         {
