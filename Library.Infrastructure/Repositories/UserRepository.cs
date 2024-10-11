@@ -12,9 +12,9 @@ namespace Library.Infrastructure.Repositories
         {
         }
 
-        public Task<User> GetByEmail(string email, CancellationToken cancellationToken)
+        public async Task<User> GetByEmail(string email, CancellationToken cancellationToken)
         {
-            return Context.Users.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+            return await Context.Users.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
         }
     }
 }

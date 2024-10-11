@@ -1,6 +1,5 @@
 ﻿using Library.Application.DTOs;
-using Library.Application.Repositories;
-using Library.Core.Entities;
+using Library.Application.Features.Users.Queries.GetUsers;
 
 using MediatR;
 
@@ -19,14 +18,19 @@ namespace Library.API.Controllers
             _mediator = mediator;
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult<List<GetAllUserResponse>>> GetAll(CancellationToken cancellationToken)
-        //{
-        //    var response = await _mediator.Send(new Get(), cancellationToken);
-        //    return Ok(response);
-        //}
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllAsync()
+        {
+            var response = await _mediator.Send(new GetAllUsersQuery());
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
 
-        [HttpPost]
+            return BadRequest(response);
+        }
+
+        [HttpPost("Create")]
         public async Task<ActionResult<UserDto>> Create(UserDto request,
             CancellationToken cancellationToken)
         {

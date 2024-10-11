@@ -17,29 +17,28 @@ namespace Library.Infrastructure.Repositories
 
         public async Task<bool> Create(T entity)
         {
-            Context.Add(entity);
+            await Context.AddAsync(entity);
             return true;
-
         }
 
         public async Task<bool> Update(T entity)
         {
-             Context.Update(entity);
+            Context.Update(entity);
+            await Context.SaveChangesAsync();
             return true;
-
         }
 
         public async Task<bool> Delete(T entity)
         {
             entity.Update();
             Context.Update(entity);
+            await Context.SaveChangesAsync();
             return true;
-
         }
 
-        public  Task<T> Get(Guid id, CancellationToken cancellationToken)
+        public async Task<T?> Get(Guid id, CancellationToken cancellationToken)
         {
-            return Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            return await Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public Task<List<T>> GetAll(CancellationToken cancellationToken)

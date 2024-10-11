@@ -8,10 +8,8 @@
 
   <ItemGroup>
     <Folder Include="Features\Books\Queries\" />
-    <Folder Include="Features\Books\Commands\DeleteBook\" />
-    <Folder Include="Features\Books\Commands\ReturnBook\" />
+    <Folder Include="Features\Books\Commands\ReturnBookCommand\" />
     <Folder Include="Features\Loans\Queries\GetLoanByUser\" />
-    <Folder Include="Features\Loans\Queries\GetLoanById\" />
     <Folder Include="Services\" />
     <Folder Include="Features\Books\Queries\GetBooks\" />
     <Folder Include="Features\Books\Queries\GetBookById\" />

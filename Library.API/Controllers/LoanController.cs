@@ -1,5 +1,9 @@
-﻿using Library.Application.Repositories;
-using Library.Core.Entities;
+﻿using Library.Application.Features.Loans.Commands.CreateLoanCommand;
+using Library.Application.Features.Loans.Commands.UpdateLoanCommand;
+using Library.Application.Features.Loans.Queries.GetAllLoansQuery;
+using Library.Application.Features.Loans.Queries.GetLoanByIdQuery;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,43 +13,65 @@ namespace Library.API.Controllers
     [Route("api/Loans")]
     public class LoanController : ControllerBase
     {
-        private ILoanRepository _loanRepository;
+        private readonly IMediator _mediator;
 
-        public LoanController(ILoanRepository loanRepository)
+        public LoanController( IMediator mediator)
         {
-            _loanRepository = loanRepository;
+            _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<Loan>> GetLoans(CancellationToken cancellationToken)
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllAsync()
         {
-            return await _loanRepository.GetAll(cancellationToken);
-        }
-
-        [HttpGet("{id}")]
-        public async Task<Loan> GetLoan(Guid id, CancellationToken cancellationToken)
-        {
-            return await _loanRepository.Get(id, cancellationToken);
-
-        }
-
-        [HttpPost]
-        public async Task CreateLoan(Loan loan)
-        {
-            await _loanRepository.Create(loan);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> UpdateLoan(Loan loan)
-        {
-            var cancellationToken = new CancellationToken();    
-            var existingLoan = await _loanRepository.Get(loan.Id, cancellationToken);
-            if (existingLoan == null)
+            var response = await _mediator.Send(new GetAllLoanQuery());
+            if (response.succcess)
             {
-                return NotFound();
+                return Ok(response);
             }
-            await _loanRepository.Update(loan);
-            return Ok("Loan Upated");
+
+            return BadRequest(response);
+        }
+
+        [HttpGet("Get")]
+        public async Task<IActionResult> GetAsync([FromQuery] Guid loanId)
+        {
+            var response = await _mediator.Send(new GetLoanByIdQuery() { LoanId = loanId });
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+        }
+
+        [HttpPost("Create")]
+        public async Task<ActionResult> Create([FromBody] CreateLoanCommand command)
+        {
+            if (command is null) return BadRequest();
+
+            var response = await _mediator.Send(command);
+
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+        }
+
+        [HttpPut("Update")]
+        public async Task<ActionResult> UpdateAsync([FromBody] UpdateLoanCommand command)
+        {
+            if (command is null) return BadRequest();
+
+            var response = await _mediator.Send(command);
+
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
         }
 
     }
