@@ -1,12 +1,11 @@
 ﻿using AutoMapper;
-
 using Library.Application.DTOs;
 using Library.Application.Repositories;
 using Library.Core.Entities;
 
 using MediatR;
 
-namespace Library.Application.Features.Commands.CreateUser
+namespace Library.Application.Features.Users.Commands.CreateUser
 {
     public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, UserDto>
     {
@@ -23,7 +22,7 @@ namespace Library.Application.Features.Commands.CreateUser
 
         public async Task<UserDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = new User(request.Name,request.Name,DateTime.Now,request.Email);
+            var user = new User(request.Name, request.Name, DateTime.Now, request.Email);
 
             await _userRepository.Create(user);
             await _unitOfWork.Save(cancellationToken);

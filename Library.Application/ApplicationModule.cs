@@ -1,5 +1,4 @@
-﻿using Library.Application.Features.Commands.CreateUser;
-
+﻿using Library.Application.Features.Users.Commands.CreateUser;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Library.Application

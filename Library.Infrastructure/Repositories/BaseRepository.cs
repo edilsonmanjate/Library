@@ -15,20 +15,26 @@ namespace Library.Infrastructure.Repositories
             Context = context;
         }
 
-        public async Task Create(T entity)
+        public async Task<bool> Create(T entity)
         {
             Context.Add(entity);
+            return true;
+
         }
 
-        public async Task Update(T entity)
+        public async Task<bool> Update(T entity)
         {
              Context.Update(entity);
+            return true;
+
         }
 
-        public async Task Delete(T entity)
+        public async Task<bool> Delete(T entity)
         {
             entity.Update();
             Context.Update(entity);
+            return true;
+
         }
 
         public  Task<T> Get(Guid id, CancellationToken cancellationToken)

@@ -1,8 +1,7 @@
 ﻿using FluentValidation;
-
 using Library.Application.DTOs;
 
-namespace Library.Application.Features.Commands.CreateUser
+namespace Library.Application.Features.Users.Commands.CreateUser
 {
     public sealed class CreateUserValidator : AbstractValidator<userInputModel>
     {

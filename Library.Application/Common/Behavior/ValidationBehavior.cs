@@ -13,7 +13,7 @@ namespace Library.Application.Common.Behavior
 
         public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
         {
-            _validators = validators;
+            _validators = validators ?? throw new ArgumentNullException(nameof(validators)); ;
         }
 
         public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)

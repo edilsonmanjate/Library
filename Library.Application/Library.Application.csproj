@@ -7,25 +7,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Commands\CreateBook\" />
-    <Folder Include="Features\Commands\CreateLoan\" />
-    <Folder Include="Features\Commands\DeleteBook\" />
-    <Folder Include="Features\Commands\UpdateUser\" />
-    <Folder Include="Features\Commands\UpdateLoan\" />
-    <Folder Include="Features\Commands\UpdateBook\" />
-    <Folder Include="Features\Commands\ReturnBook\" />
+    <Folder Include="Features\Books\Commands\" />
+    <Folder Include="Features\Books\Queries\" />
+    <Folder Include="Features\Books\Commands\CreateBook\" />
+    <Folder Include="Features\Books\Commands\DeleteBook\" />
+    <Folder Include="Features\Users\Commands\UpdateUser\" />
+    <Folder Include="Features\Books\Commands\UpdateBook\" />
+    <Folder Include="Features\Books\Commands\ReturnBook\" />
+    <Folder Include="Features\Loans\Queries\GetLoanByUser\" />
+    <Folder Include="Features\Loans\Queries\GetLoanById\" />
     <Folder Include="Services\" />
     <Folder Include="Validators\" />
-    <Folder Include="Features\Queries\GetBooks\" />
-    <Folder Include="Features\Queries\GetBookById\" />
-    <Folder Include="Features\Queries\GetLoans\" />
-    <Folder Include="Features\Queries\GetLoanById\" />
+    <Folder Include="Features\Books\Queries\GetBooks\" />
+    <Folder Include="Features\Books\Queries\GetBookById\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="FluentValidation" Version="11.10.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
-
 using Library.Application.DTOs;
 using Library.Core.Entities;
 
-namespace Library.Application.Features.Commands.CreateUser
+namespace Library.Application.Features.Users.Commands.CreateUser
 {
     public sealed class CreateUserMapper : Profile
     {
