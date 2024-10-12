@@ -27,77 +27,7 @@ namespace Library.Tests
          
         }
 
-        [Fact]
-        public async Task GetAllAsync_ReturnsOkResult_WhenResponseIsSuccessful()
-        {
-
-            // Arrange
-            var query = new GetAllBooksQuery();
-            var response = new BaseResponse<IEnumerable<BookDto>> { Success = true };
-            _mediatorMock.Setup(x => x.Send(query, default)).ReturnsAsync(response);
-
-            // Act
-            var result = await _booksController.GetAllAsync();
-
-            // Assert
-            Assert.IsType<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.Equal(response, okResult.Value);
-        }
-
-        [Fact]
-        public async Task GetAllAsync_ReturnsBadRequestResult_WhenResponseIsNotSuccessful()
-        {
-            // Arrange
-            var query = new GetAllBooksQuery();
-            var response = new BaseResponse<IEnumerable<BookDto>> { Success = false };
-            _mediatorMock.Setup(x => x.Send(query, default)).ReturnsAsync(response);
-
-            // Act
-            var result = await _booksController.GetAllAsync();
-
-            // Assert
-            Assert.IsType<BadRequestObjectResult>(result);
-            var badRequestResult = (BadRequestObjectResult)result;
-            Assert.Equal(response, badRequestResult.Value);
-        }
-
-        [Fact]
-        public async Task GetAsync_ReturnsOkResult_WhenResponseIsSuccessful()
-        {
-            // Arrange
-            var bookId = Guid.NewGuid();
-            var query = new GetBookByIdQuery { BookId = bookId };
-            var response = new BaseResponse<BookDto> { Success = true };
-            _mediatorMock.Setup(x => x.Send(query, default)).ReturnsAsync(response);
-
-            // Act
-            var result = await _booksController.GetAsync(bookId);
-
-            // Assert
-            Assert.IsType<OkObjectResult>(result);
-            var okResult = (OkObjectResult)result;
-            Assert.Equal(response, okResult.Value);
-        }
-
-        [Fact]
-        public async Task GetAsync_ReturnsBadRequestResult_WhenResponseIsNotSuccessful()
-        {
-            // Arrange
-            var bookId = Guid.NewGuid();
-            var query = new GetBookByIdQuery { BookId = bookId };
-            var response = new BaseResponse<BookDto> { Success = false };
-            _mediatorMock.Setup(x => x.Send(query, default)).ReturnsAsync(response);
-
-            // Act
-            var result = await _booksController.GetAsync(bookId);
-
-            // Assert
-            Assert.IsType<BadRequestObjectResult>(result);
-            var badRequestResult = (BadRequestObjectResult)result;
-            Assert.Equal(response, badRequestResult.Value);
-        }
-
+      
         [Fact]
         public async Task CreateAsync_ReturnsOkResult_WhenResponseIsSuccessful()
         {

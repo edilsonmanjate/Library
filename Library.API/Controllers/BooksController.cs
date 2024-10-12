@@ -51,7 +51,7 @@ namespace Library.API.Controllers
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command,cancellationToken);
+            var response = await _mediator.Send(command, cancellationToken);
 
             if (response.Success)
             {
@@ -67,7 +67,7 @@ namespace Library.API.Controllers
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command,cancellationToken);
+            var response = await _mediator.Send(command, cancellationToken);
 
             if (response.Success)
             {
@@ -82,7 +82,7 @@ namespace Library.API.Controllers
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command,cancellationToken);
+            var response = await _mediator.Send(command, cancellationToken);
 
             if (response.Success)
             {
