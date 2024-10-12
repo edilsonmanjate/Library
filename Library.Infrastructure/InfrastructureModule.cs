@@ -12,7 +12,7 @@ namespace Library.Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("Sqlite");
+            var connectionString = configuration.GetConnectionString("SQLiteConnection");
 
             services
                 .AddDb(connectionString)
@@ -23,8 +23,8 @@ namespace Library.Infrastructure
 
         private static IServiceCollection AddDb(this IServiceCollection services, string? connectionString)
         {
-            //services.AddDbContext<LibraryDbContext>(options => options.UseSqlite(connectionString));
-            services.AddDbContext<LibraryDbContext>(options => options.UseInMemoryDatabase("Library"));
+            services.AddDbContext<LibraryDbContext>(options => options.UseSqlite(connectionString));
+            //services.AddDbContext<LibraryDbContext>(options => options.UseInMemoryDatabase("Library"));
 
             return services;
         }
