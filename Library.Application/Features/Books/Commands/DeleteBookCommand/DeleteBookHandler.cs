@@ -32,7 +32,7 @@ namespace Library.Application.Features.Books.Commands.DeleteBookCommand
                 await _unitOfWork.Save(cancellationToken);
 
                 if (response.Data)
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Delete succeed!";
 
             }

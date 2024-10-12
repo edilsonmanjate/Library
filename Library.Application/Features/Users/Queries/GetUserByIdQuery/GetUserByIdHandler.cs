@@ -36,7 +36,7 @@ namespace Library.Application.Features.Users.Queries.GetUserByIdQuery
                 if (user is not null)
                 {
                     response.Data = _mapper.Map<UserDto>(user);
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Query succeed!";
                 }
             }

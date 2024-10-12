@@ -30,7 +30,7 @@ namespace Library.Application.Features.Loans.Queries.GetLoanByIdQuery
                 if (loan is not null)
                 {
                     response.Data = _mapper.Map<LoanDto>(loan);
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Query succeed!";
                 }
             }

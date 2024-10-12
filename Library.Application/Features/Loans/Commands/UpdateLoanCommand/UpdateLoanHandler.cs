@@ -31,7 +31,7 @@ namespace Library.Application.Features.Loans.Commands.UpdateLoanCommand
                 await _unitOfWork.Save(cancellationToken);
 
                 if (response.Data)
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Loan update succeed!";
             }
             catch (Exception ex)

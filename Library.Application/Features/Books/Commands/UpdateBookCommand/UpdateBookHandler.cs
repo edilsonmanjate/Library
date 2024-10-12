@@ -33,7 +33,7 @@ namespace Library.Application.Features.Books.Commands.UpdateBookCommand
 
                 if (response.Data)
                 {
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Update succeed!";
                 }
             }

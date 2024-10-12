@@ -30,7 +30,7 @@ namespace Library.Application.Features.Loans.Queries.GetLoanByUserQuery
                 if (loans is not null)
                 {
                     response.Data = _mapper.Map<IEnumerable<LoanDto>>(loans);
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Query succeed!";
                 }
             }

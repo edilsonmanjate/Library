@@ -25,7 +25,7 @@ namespace Library.Application.Features.Users.Commands.UpdateUserCommand
 
                 if (response.Data)
                 {
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Update succeed!";
                 }
             }

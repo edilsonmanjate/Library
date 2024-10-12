@@ -30,7 +30,7 @@ namespace Library.Application.Features.Books.Queries.GetAllBooksQuery
                 if (books is not null)
                 {
                     response.Data = _mapper.Map<IEnumerable<BookDto>>(books);
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Query succeed!";
                 }
             }

@@ -30,7 +30,7 @@ namespace Library.Application.Features.Books.Queries.GetBookByIdQuery
                 if (book is not null)
                 {
                     response.Data = _mapper.Map<BookDto>(book);
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Query succeed!";
                 }
            

@@ -31,7 +31,7 @@ namespace Library.Application.Features.Users.Commands.CreateUserCommand
                 await _unitOfWork.Save(cancellationToken);
 
                 if (response.Data)
-                    response.succcess = true;
+                    response.Success = true;
                 response.Message = "Create succeed!";
             }
             catch (Exception ex)

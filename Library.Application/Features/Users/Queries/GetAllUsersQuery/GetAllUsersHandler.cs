@@ -30,7 +30,7 @@ namespace Library.Application.Features.Users.Queries.GetAllUsersQuery
                 if (users is not null)
                 {
                     response.Data = _mapper.Map<IEnumerable<UserDto>>(users);
-                    response.succcess = true;
+                    response.Success = true;
                     response.Message = "Query succeed!";
                 }
             }

@@ -25,7 +25,7 @@ namespace Library.API.Controllers
         public async Task<IActionResult> GetAllAsync()
         {
             var response = await _mediator.Send(new GetAllLoanQuery());
-            if (response.succcess)
+            if (response.Success)
             {
                 return Ok(response);
             }
@@ -37,7 +37,7 @@ namespace Library.API.Controllers
         public async Task<IActionResult> GetAsync([FromQuery] Guid loanId)
         {
             var response = await _mediator.Send(new GetLoanByIdQuery() { LoanId = loanId });
-            if (response.succcess)
+            if (response.Success)
             {
                 return Ok(response);
             }
@@ -52,7 +52,7 @@ namespace Library.API.Controllers
 
             var response = await _mediator.Send(command);
 
-            if (response.succcess)
+            if (response.Success)
             {
                 return Ok(response);
             }
@@ -67,7 +67,7 @@ namespace Library.API.Controllers
 
             var response = await _mediator.Send(command);
 
-            if (response.succcess)
+            if (response.Success)
             {
                 return Ok(response);
             }
@@ -82,7 +82,7 @@ namespace Library.API.Controllers
 
             var response = await _mediator.Send(command);
 
-            if (response.succcess)
+            if (response.Success)
             {
                 return Ok(response);
             }
