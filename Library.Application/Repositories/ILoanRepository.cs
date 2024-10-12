@@ -4,11 +4,7 @@ namespace Library.Application.Repositories
 {
     public interface ILoanRepository : IBaseRepository<Loan>
     {
-
-        //Cadastrar Data de Devolução
-        //Devolver um Livro
-        Task ReturnAsync(Loan loan, DateTime returnDate);
-
-
+        Task<bool> ReturnAsync(Loan loan, DateTime returnDate,CancellationToken cancellation);
+        Task<List<Loan>> GetByUser(Guid userId, CancellationToken cancellation);
     }
 }

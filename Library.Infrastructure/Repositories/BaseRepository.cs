@@ -8,42 +8,42 @@ namespace Library.Infrastructure.Repositories
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : BaseEntity
     {
-        protected readonly LibraryDbContext Context;
+        protected readonly LibraryDbContext _context;
 
         public BaseRepository(LibraryDbContext context)
         {
-            Context = context;
+            _context = context;
         }
 
         public async Task<bool> Create(T entity)
         {
-            await Context.AddAsync(entity);
+            await _context.AddAsync(entity);
             return true;
         }
 
         public async Task<bool> Update(T entity)
         {
-            Context.Update(entity);
-            await Context.SaveChangesAsync();
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
             return true;
         }
 
         public async Task<bool> Delete(T entity)
         {
             entity.Update();
-            Context.Update(entity);
-            await Context.SaveChangesAsync();
+            _context.Update(entity);
+            await _context.SaveChangesAsync();
             return true;
         }
 
         public async Task<T?> Get(Guid id, CancellationToken cancellationToken)
         {
-            return await Context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
+            return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
         }
 
         public Task<List<T>> GetAll(CancellationToken cancellationToken)
         {
-            return Context.Set<T>().ToListAsync(cancellationToken);
+            return _context.Set<T>().ToListAsync(cancellationToken);
         }
     }
 }

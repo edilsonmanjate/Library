@@ -19,7 +19,7 @@ namespace Library.Application.Features.Books.Queries.GetAllBooksQuery
             _mapper = mapper;
         }
 
-        public async Task<BaseResponse<IEnumerable<BookDto>>> IRequestHandler<GetAllBooksQuery, BaseResponse<IEnumerable<BookDto>>>.Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<IEnumerable<BookDto>>> Handle(GetAllBooksQuery request, CancellationToken cancellationToken)
         {
             var response = new BaseResponse<IEnumerable<BookDto>>();
 
