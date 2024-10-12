@@ -33,8 +33,6 @@ namespace Library.Application.Features.Books.Commands.CreateBookCommand
                 if (response.Data)
                     response.Data = true;
                     response.Message = "Book created successfully";
-
-
             }
             catch (Exception ex)
             {

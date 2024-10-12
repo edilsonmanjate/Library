@@ -7,17 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\Books\Commands\ReturnBookCommand\**" />
+    <Compile Remove="Features\Loans\Queries\GetLoanByUser\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Features\Books\Commands\ReturnBookCommand\**" />
+    <EmbeddedResource Remove="Features\Loans\Queries\GetLoanByUser\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Features\Books\Commands\ReturnBookCommand\**" />
+    <None Remove="Features\Loans\Queries\GetLoanByUser\**" />
     <None Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Books\Queries\" />
-    <Folder Include="Features\Books\Commands\ReturnBookCommand\" />
-    <Folder Include="Features\Loans\Queries\GetLoanByUser\" />
-    <Folder Include="Features\Books\Queries\GetBooks\" />
-    <Folder Include="Features\Books\Queries\GetBookById\" />
+    <Folder Include="Features\Loans\Commands\ReturnLoanCommand\" />
+    <Folder Include="Features\Loans\Queries\GetLoanByUserQuery\" />
   </ItemGroup>
 
   <ItemGroup>
