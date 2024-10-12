@@ -27,7 +27,7 @@ namespace Library.Application.Features.Loans.Commands.ReturnLoanCommand
             try
             {
                 var loan = _mapper.Map<Loan>(command.Loan);
-                response.Data = await _loanRepository.ReturnAsync(loan, command.ReturnDate);
+                response.Data = await _loanRepository.ReturnAsync(loan, command.ReturnDate, cancellationToken);
                 await _unitOfWork.Save(cancellationToken);
 
                 if (response.Data)
