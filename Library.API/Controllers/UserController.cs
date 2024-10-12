@@ -1,6 +1,6 @@
-﻿using Library.Application.DTOs;
-using Library.Application.Features.Users.Commands.CreateUserCommand;
-using Library.Application.Features.Users.Queries.GetUsers;
+﻿using Library.Application.Features.Users.Commands.CreateUserCommand;
+using Library.Application.Features.Users.Queries.GetAllUsersQuery;
+using Library.Application.Features.Users.Queries.GetUserByIdQuery;
 
 using MediatR;
 
@@ -30,6 +30,7 @@ namespace Library.API.Controllers
 
             return BadRequest(response);
         }
+
         [HttpPost("Create")]
         public async Task<ActionResult> Create([FromBody] CreateUserCommand command, CancellationToken cancellationToken)
         {
@@ -37,6 +38,18 @@ namespace Library.API.Controllers
 
             var response = await _mediator.Send(command, cancellationToken);
 
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetAsync([FromQuery] Guid userId)
+        {
+            var response = await _mediator.Send(new GetUserByIdQuery() { UserId = userId });
             if (response.succcess)
             {
                 return Ok(response);

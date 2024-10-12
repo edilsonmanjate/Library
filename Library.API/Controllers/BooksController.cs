@@ -1,5 +1,10 @@
-﻿using Library.Application.Repositories;
-using Library.Core.Entities;
+﻿using Library.Application.Features.Books.Commands.CreateBookCommand;
+using Library.Application.Features.Books.Commands.DeleteBookCommand;
+using Library.Application.Features.Books.Commands.UpdateBookCommand;
+using Library.Application.Features.Books.Queries.GetAllBooksQuery;
+using Library.Application.Features.Books.Queries.GetBookByIdQuery;
+
+using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,46 +15,82 @@ namespace Library.API.Controllers
     //[OutputCache]
     public class BooksController : ControllerBase
     {
-        private IBookRepository _bookRepository;
+        private IMediator _mediator;
 
-        public BooksController(IBookRepository bookRepository)
+        public BooksController(IMediator mediator)
         {
-            _bookRepository = bookRepository;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); ;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<Book>> GetBooks(CancellationToken cancellationToken)
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllAsync()
         {
-            return await _bookRepository.GetAll(cancellationToken);
+            var response = await _mediator.Send(new GetAllBooksQuery());
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<Book> GetBook(Guid id, CancellationToken cancellationToken)
+        [HttpGet("Get")]
+        public async Task<IActionResult> GetAsync([FromQuery] Guid bookId)
         {
-            return await _bookRepository.Get(id,cancellationToken);
+            var response = await _mediator.Send(new GetBookByIdQuery() { BookId = bookId });
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
 
+            return BadRequest(response);
         }
 
-        [HttpPost]
-        public async Task CreateBook(Book book)
+        [HttpPost("Add")]
+        public async Task<ActionResult> InsertAsync([FromBody] CreateBookCommand command)
         {
-           await _bookRepository.Create(book);
+            if (command is null) return BadRequest();
+
+            var response = await _mediator.Send(command);
+
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
         }
 
 
-        [HttpPut]
-        public async Task<IActionResult> UpdateBook(Book book)
+        [HttpPut("Update")]
+        public async Task<ActionResult> UpdateAsync([FromBody] UpdateBookCommand command)
         {
-           await _bookRepository.Update(book);
-            return Ok("Book Upated");
+            if (command is null) return BadRequest();
+
+            var response = await _mediator.Send(command);
+
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
         }
 
-        [HttpDelete]
-        public async Task<IActionResult> DeleteBook(Book book)
+        [HttpDelete("Delete")]
+        public async Task<ActionResult> DeleteAsync([FromQuery] DeleteBookCommand command)
         {
-            await _bookRepository.Delete(book);
-            return Ok("Book Deleted");
-        }
+            if (command is null) return BadRequest();
 
+            var response = await _mediator.Send(command);
+
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+        }
     }
 }
+

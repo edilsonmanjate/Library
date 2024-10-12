@@ -1,4 +1,5 @@
 ﻿using Library.Application.Features.Loans.Commands.CreateLoanCommand;
+using Library.Application.Features.Loans.Commands.ReturnLoanCommand;
 using Library.Application.Features.Loans.Commands.UpdateLoanCommand;
 using Library.Application.Features.Loans.Queries.GetAllLoansQuery;
 using Library.Application.Features.Loans.Queries.GetLoanByIdQuery;
@@ -61,6 +62,21 @@ namespace Library.API.Controllers
 
         [HttpPut("Update")]
         public async Task<ActionResult> UpdateAsync([FromBody] UpdateLoanCommand command)
+        {
+            if (command is null) return BadRequest();
+
+            var response = await _mediator.Send(command);
+
+            if (response.succcess)
+            {
+                return Ok(response);
+            }
+
+            return BadRequest(response);
+        }
+
+        [HttpPut("ReturnBook")]
+        public async Task<ActionResult> ReturnBook([FromBody] ReturnLoanCommand command)
         {
             if (command is null) return BadRequest();
 
