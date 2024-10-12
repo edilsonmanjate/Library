@@ -1,6 +1,4 @@
-﻿
-
-using Library.API.Controllers;
+﻿using Library.API.Controllers;
 using Library.Application.Common.Bases;
 using Library.Application.DTOs;
 using Library.Application.Features.Books.Commands.CreateBookCommand;
@@ -28,7 +26,6 @@ namespace Library.Tests
             _booksController = new BooksController(_mediatorMock.Object);
         }
 
-        // Update the test methods to use the correct type for the response
         [Fact]
         public async Task GetAllAsync_ReturnsOkResult_WhenResponseIsSuccessful()
         {
@@ -155,7 +152,7 @@ namespace Library.Tests
         {
             // Arrange
             var command = new UpdateBookCommand();
-            var response = new BaseResponse<bool> { Success = false };
+            var response = new BaseResponse<bool> { Success = true };
             _mediatorMock.Setup(x => x.Send(command, default)).ReturnsAsync(response);
 
             // Act

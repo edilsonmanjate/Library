@@ -8,13 +8,13 @@ using MediatR;
 
 namespace Library.Application.Features.Users.Commands.CreateUserCommand
 {
-    public sealed class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, BaseResponse<bool>>
+    public sealed class CreateUserHandler : IRequestHandler<CreateUserCommand, BaseResponse<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
-        public CreateUserCommandHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMapper mapper)
+        public CreateUserHandler(IUnitOfWork unitOfWork, IUserRepository userRepository, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
@@ -32,7 +32,7 @@ namespace Library.Application.Features.Users.Commands.CreateUserCommand
 
                 if (response.Data)
                     response.Success = true;
-                response.Message = "Create succeed!";
+                    response.Message = "Create succeed!";
             }
             catch (Exception ex)
             {

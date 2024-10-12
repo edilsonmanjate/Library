@@ -15,7 +15,7 @@ namespace Library.API.Controllers
     //[OutputCache]
     public class BooksController : ControllerBase
     {
-        private IMediator _mediator;
+        private readonly IMediator _mediator;
 
         public BooksController(IMediator mediator)
         {
@@ -46,12 +46,12 @@ namespace Library.API.Controllers
             return BadRequest(response);
         }
 
-        [HttpPost("Add")]
-        public async Task<ActionResult> InsertAsync([FromBody] CreateBookCommand command)
+        [HttpPost("Create")]
+        public async Task<ActionResult> Create([FromBody] CreateBookCommand command, CancellationToken cancellationToken)
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(command,cancellationToken);
 
             if (response.Success)
             {
@@ -63,11 +63,11 @@ namespace Library.API.Controllers
 
 
         [HttpPut("Update")]
-        public async Task<ActionResult> UpdateAsync([FromBody] UpdateBookCommand command)
+        public async Task<ActionResult> UpdateAsync([FromBody] UpdateBookCommand command, CancellationToken cancellationToken)
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(command,cancellationToken);
 
             if (response.Success)
             {
@@ -78,11 +78,11 @@ namespace Library.API.Controllers
         }
 
         [HttpDelete("Delete")]
-        public async Task<ActionResult> DeleteAsync([FromQuery] DeleteBookCommand command)
+        public async Task<ActionResult> DeleteAsync([FromQuery] DeleteBookCommand command, CancellationToken cancellationToken)
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(command,cancellationToken);
 
             if (response.Success)
             {

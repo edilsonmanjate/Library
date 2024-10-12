@@ -27,11 +27,12 @@ namespace Library.Application.Features.Books.Commands.CreateBookCommand
             try
             {
                 var book = _mapper.Map<Book>(command); 
+
                 response.Data = await _bookRepository.Create(book);
                 await _unitOfWork.Save(cancellationToken);
                 
                 if (response.Data)
-                    response.Data = true;
+                    response.Success = true;
                     response.Message = "Book created successfully";
             }
             catch (Exception ex)
