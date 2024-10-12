@@ -6,29 +6,21 @@ using Library.Core.Entities;
 
 using MediatR;
 
-namespace Library.Application.Features.Books.Commands.UpdateBookCommand
+namespace Library.Application.Features.Users.Commands.UpdateUserCommand
 {
-    public class UpdateBookHandler : IRequestHandler<UpdateBookCommand, BaseResponse<bool>>
+    public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, BaseResponse<bool>>
     {
-        private readonly IBookRepository _bookRepository;
+        private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-
-        public UpdateBookHandler(IBookRepository bookRepository, IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            _bookRepository = bookRepository;
-            _unitOfWork = unitOfWork;
-            _mapper = mapper;
-        }
-
-        public async Task<BaseResponse<bool>> Handle(UpdateBookCommand command, CancellationToken cancellationToken)
+        
+        public async Task<BaseResponse<bool>> Handle(UpdateUserCommand command, CancellationToken cancellationToken)
         {
             var response = new BaseResponse<bool>();
-
             try
             {
-                var book = _mapper.Map<Book>(command);
-                response.Data = await _bookRepository.Update(book);
+                var user = _mapper.Map<User>(command);
+                response.Data = await _userRepository.Update(user);
                 await _unitOfWork.Save(cancellationToken);
 
                 if (response.Data)
@@ -41,8 +33,6 @@ namespace Library.Application.Features.Books.Commands.UpdateBookCommand
             {
                 response.Message = ex.Message;
             }
-
-
             return response;
         }
     }

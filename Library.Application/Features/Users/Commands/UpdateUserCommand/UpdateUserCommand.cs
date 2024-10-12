@@ -1,11 +1,11 @@
-﻿using Library.Application.DTOs;
+﻿using Library.Application.Common.Bases;
 using Library.Core.Enums;
 
 using MediatR;
 
 namespace Library.Application.Features.Users.Commands.UpdateUserCommand
 {
-    public class UpdateUserCommand : IRequest<UserDto>
+    public class UpdateUserCommand : IRequest<BaseResponse<bool>>
     {
         public Guid Id { get; set; }
         public string? Email { get; set; }
