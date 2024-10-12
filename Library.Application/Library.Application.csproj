@@ -30,4 +30,8 @@
     <ProjectReference Include="..\Library.core\Library.core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Users\Queries\GetUserByIdQuery\" />
+  </ItemGroup>
+
 </Project>

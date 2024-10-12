@@ -2,12 +2,11 @@
 
 using Library.Application.Common.Bases;
 using Library.Application.DTOs;
-using Library.Application.Features.Users.Queries.GetUsers;
 using Library.Application.Repositories;
 
 using MediatR;
 
-namespace Library.Application.Features.Users.Queries.GetAllUsers
+namespace Library.Application.Features.Users.Queries.GetAllUsersQuery
 {
     public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, BaseResponse<IEnumerable<UserDto>>>
     {
