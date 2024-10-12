@@ -24,11 +24,13 @@ namespace Library.Tests
         {
             _mediatorMock = new Mock<IMediator>();
             _booksController = new BooksController(_mediatorMock.Object);
+         
         }
 
         [Fact]
         public async Task GetAllAsync_ReturnsOkResult_WhenResponseIsSuccessful()
         {
+
             // Arrange
             var query = new GetAllBooksQuery();
             var response = new BaseResponse<IEnumerable<BookDto>> { Success = true };
@@ -97,7 +99,7 @@ namespace Library.Tests
         }
 
         [Fact]
-        public async Task InsertAsync_ReturnsOkResult_WhenResponseIsSuccessful()
+        public async Task CreateAsync_ReturnsOkResult_WhenResponseIsSuccessful()
         {
             // Arrange
             var command = new CreateBookCommand();
@@ -105,7 +107,7 @@ namespace Library.Tests
             _mediatorMock.Setup(x => x.Send(command, default)).ReturnsAsync(response);
 
             // Act
-            var result = await _booksController.InsertAsync(command);
+            var result = await _booksController.Create(command, default);
 
             // Assert
             Assert.IsType<OkObjectResult>(result);
@@ -114,7 +116,7 @@ namespace Library.Tests
         }
 
         [Fact]
-        public async Task InsertAsync_ReturnsBadRequestResult_WhenResponseIsNotSuccessful()
+        public async Task CreateAsync_ReturnsBadRequestResult_WhenResponseIsNotSuccessful()
         {
             // Arrange
             var command = new CreateBookCommand();
@@ -122,7 +124,7 @@ namespace Library.Tests
             _mediatorMock.Setup(x => x.Send(command, default)).ReturnsAsync(response);
 
             // Act
-            var result = await _booksController.InsertAsync(command);
+            var result = await _booksController.Create(command, default);
 
             // Assert
             Assert.IsType<BadRequestObjectResult>(result);
@@ -139,7 +141,7 @@ namespace Library.Tests
             _mediatorMock.Setup(x => x.Send(command, default)).ReturnsAsync(response);
 
             // Act
-            var result = await _booksController.UpdateAsync(command);
+            var result = await _booksController.UpdateAsync(command, default);
 
             // Assert
             Assert.IsType<OkObjectResult>(result);
@@ -152,11 +154,11 @@ namespace Library.Tests
         {
             // Arrange
             var command = new UpdateBookCommand();
-            var response = new BaseResponse<bool> { Success = true };
+            var response = new BaseResponse<bool> { Success = false };
             _mediatorMock.Setup(x => x.Send(command, default)).ReturnsAsync(response);
 
             // Act
-            var result = await _booksController.UpdateAsync(command);
+            var result = await _booksController.UpdateAsync(command, default);
 
             // Assert
             Assert.IsType<BadRequestObjectResult>(result);
@@ -173,7 +175,7 @@ namespace Library.Tests
             _mediatorMock.Setup(x => x.Send(command, default)).ReturnsAsync(response);
 
             // Act
-            var result = await _booksController.DeleteAsync(command);
+            var result = await _booksController.DeleteAsync(command, default);
 
             // Assert
             Assert.IsType<OkObjectResult>(result);
@@ -190,7 +192,7 @@ namespace Library.Tests
             _mediatorMock.Setup(x => x.Send(command, default)).ReturnsAsync(response);
 
             // Act
-            var result = await _booksController.DeleteAsync(command);
+            var result = await _booksController.DeleteAsync(command, default);
 
             // Assert
             Assert.IsType<BadRequestObjectResult>(result);
