@@ -70,7 +70,6 @@ namespace Library.Tests
             var response = new BaseResponse<LoanDto> { Success = true };
             _mediatorMock.Setup(x => x.Send(It.IsAny<GetLoanByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
 
-
             // Act
             var result = await _loanController.GetAsync(loanId);
 
