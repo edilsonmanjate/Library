@@ -18,7 +18,7 @@ namespace Library.API.Controllers
 
         public LoanController( IMediator mediator)
         {
-            _mediator = mediator;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
         [HttpGet("GetAll")]
@@ -36,6 +36,11 @@ namespace Library.API.Controllers
         [HttpGet("Get")]
         public async Task<IActionResult> GetAsync([FromQuery] Guid loanId)
         {
+            if (_mediator == null)
+            {
+                throw new InvalidOperationException("_mediator is not initialized.");
+            }
+
             var response = await _mediator.Send(new GetLoanByIdQuery() { LoanId = loanId });
             if (response.Success)
             {

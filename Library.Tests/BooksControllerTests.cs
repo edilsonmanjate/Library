@@ -6,6 +6,8 @@ using Library.Application.Features.Books.Commands.DeleteBookCommand;
 using Library.Application.Features.Books.Commands.UpdateBookCommand;
 using Library.Application.Features.Books.Queries.GetAllBooksQuery;
 using Library.Application.Features.Books.Queries.GetBookByIdQuery;
+using Library.Application.Features.Loans.Queries.GetAllLoansQuery;
+using Library.Application.Features.Loans.Queries.GetLoanByIdQuery;
 
 using MediatR;
 
@@ -27,7 +29,84 @@ namespace Library.Tests
          
         }
 
-      
+
+        [Fact]
+        public async Task GetAllAsync_Should_Return_OkResult_With_Response_When_Successful()
+        {
+            // Arrange
+            var query = new GetAllBooksQuery();
+            var response = new BaseResponse<IEnumerable<BookDto>> { Success = true };
+            _mediatorMock.Setup(x => x.Send(It.IsAny<GetAllBooksQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+
+            // Act
+            var result = await _booksController.GetAllAsync();
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var actualResponse = Assert.IsType<BaseResponse<IEnumerable<BookDto>>>(okResult.Value);
+            Assert.True(actualResponse.Success);
+        }
+
+        [Fact]
+        public async Task GetAllAsync_Should_Return_BadRequest_With_Response_When_Unsuccessful()
+        {
+            // Arrange
+            var query = new GetAllBooksQuery();
+            var response = new BaseResponse<IEnumerable<BookDto>> { Success = false };
+            _mediatorMock.Setup(x => x.Send(It.IsAny<GetAllBooksQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+
+
+            // Act
+            var result = await _booksController.GetAllAsync();
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            var actualResponse = Assert.IsType<BaseResponse<IEnumerable<BookDto>>>(badRequestResult.Value);
+            Assert.False(actualResponse.Success);
+        }
+
+        [Fact]
+        public async Task GetAsync_Should_Return_OkResult_With_Response_When_Successful()
+        {
+            // Arrange
+            var loanId = Guid.NewGuid();
+            var query = new GetBookByIdQuery { BookId = loanId };
+            //var response = new BaseResponse<bool> { Success = true };
+            //_mediatorMock.Setup(x => x.Send(It.IsAny<BaseResponse<bool>>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+            var response = new BaseResponse<BookDto> { Success = true };
+            _mediatorMock.Setup(x => x.Send(It.IsAny<GetBookByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+
+
+            // Act
+            var result = await _booksController.GetAsync(loanId);
+
+            // Assert
+            var okResult = Assert.IsType<OkObjectResult>(result);
+            var actualResponse = Assert.IsType<BaseResponse<BookDto>>(okResult.Value);
+            Assert.True(actualResponse.Success);
+        }
+
+        [Fact]
+        public async Task GetAsync_Should_Return_BadRequest_With_Response_When_Unsuccessful()
+        {
+            // Arrange
+            var loanId = Guid.NewGuid();
+            var query = new GetBookByIdQuery { BookId = loanId };
+
+            var response = new BaseResponse<BookDto> { Success = false };
+            _mediatorMock.Setup(x => x.Send(It.IsAny<GetBookByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
+
+            // Act
+            var result = await _booksController.GetAsync(loanId);
+
+            // Assert
+            var badRequestResult = Assert.IsType<BadRequestObjectResult>(result);
+            var actualResponse = Assert.IsType<BaseResponse<BookDto>>(badRequestResult.Value);
+            Assert.False(actualResponse.Success);
+        }
+
+
+
         [Fact]
         public async Task CreateAsync_ReturnsOkResult_WhenResponseIsSuccessful()
         {
@@ -86,6 +165,8 @@ namespace Library.Tests
             var command = new UpdateBookCommand();
             var response = new BaseResponse<bool> { Success = false };
             _mediatorMock.Setup(x => x.Send(command, default)).ReturnsAsync(response);
+
+         
 
             // Act
             var result = await _booksController.UpdateAsync(command, default);
