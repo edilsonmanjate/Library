@@ -6,8 +6,6 @@ using Library.Application.Features.Books.Commands.DeleteBookCommand;
 using Library.Application.Features.Books.Commands.UpdateBookCommand;
 using Library.Application.Features.Books.Queries.GetAllBooksQuery;
 using Library.Application.Features.Books.Queries.GetBookByIdQuery;
-using Library.Application.Features.Loans.Queries.GetAllLoansQuery;
-using Library.Application.Features.Loans.Queries.GetLoanByIdQuery;
 
 using MediatR;
 
@@ -71,8 +69,6 @@ namespace Library.Tests
             // Arrange
             var loanId = Guid.NewGuid();
             var query = new GetBookByIdQuery { BookId = loanId };
-            //var response = new BaseResponse<bool> { Success = true };
-            //_mediatorMock.Setup(x => x.Send(It.IsAny<BaseResponse<bool>>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
             var response = new BaseResponse<BookDto> { Success = true };
             _mediatorMock.Setup(x => x.Send(It.IsAny<GetBookByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
 

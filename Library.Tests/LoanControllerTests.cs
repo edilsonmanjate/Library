@@ -9,12 +9,9 @@ using Library.Application.Features.Loans.Queries.GetLoanByIdQuery;
 
 using MediatR;
 
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using Moq;
-
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Library.Tests
 {
@@ -70,8 +67,6 @@ namespace Library.Tests
             // Arrange
             var loanId = Guid.NewGuid();
             var query = new GetLoanByIdQuery { LoanId = loanId };
-            //var response = new BaseResponse<bool> { Success = true };
-            //_mediatorMock.Setup(x => x.Send(It.IsAny<BaseResponse<bool>>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
             var response = new BaseResponse<LoanDto> { Success = true };
             _mediatorMock.Setup(x => x.Send(It.IsAny<GetLoanByIdQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(response);
 
