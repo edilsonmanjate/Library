@@ -1,6 +1,8 @@
-﻿using Library.Application.Features.Users.Commands.CreateUserCommand;
+﻿using Library.Application.DTOs;
+using Library.Application.Features.Users.Commands.CreateUserCommand;
 using Library.Application.Features.Users.Queries.GetAllUsersQuery;
 using Library.Application.Features.Users.Queries.GetUserByIdQuery;
+using Library.Infrastructure.Services.Auth;
 
 using MediatR;
 
@@ -12,11 +14,25 @@ namespace Library.API.Controllers
     [Route("api/User")]
     public class UserController : ControllerBase
     {
+        private readonly JwtService _jwtService;
+
         private readonly IMediator _mediator;
 
-        public UserController(IMediator mediator)
+        public UserController(IMediator mediator, JwtService jwtService)
         {
             _mediator = mediator;
+            _jwtService = jwtService;
+        }
+
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] UserLoginDto user)
+        {
+            
+            var userRoles = new List<string> { "Admin" }; 
+
+            var token = _jwtService.GenerateToken(user.Username, userRoles);
+
+            return Ok(new { Token = token });
         }
 
         [HttpGet("GetAll")]
