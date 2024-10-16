@@ -7,12 +7,13 @@ using Library.Application.Features.Books.Queries.GetBookByIdQuery;
 using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OutputCaching;
 
 namespace Library.API.Controllers
 {
     [ApiController]
     [Route("api/books")]
-    //[OutputCache]
+    [OutputCache]
     public class BooksController : ControllerBase
     {
         private readonly IMediator _mediator;
