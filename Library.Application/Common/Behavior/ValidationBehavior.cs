@@ -20,18 +20,18 @@ namespace Library.Application.Common.Behavior
         {
             if (!_validators.Any()) return await next();
 
-            var context = new ValidationContext<TRequest>(request);
+                var context = new ValidationContext<TRequest>(request);
 
-            var errors = _validators
-                .Select(x => x.Validate(context))
-                .SelectMany(x => x.Errors)
-                .Where(x => x != null)
-                .Select(x => x.ErrorMessage)
-                .Distinct()
-                .ToArray();
+                var errors = _validators
+                    .Select(x => x.Validate(context))
+                    .SelectMany(x => x.Errors)
+                    .Where(x => x != null)
+                    .Select(x => x.ErrorMessage)
+                    .Distinct()
+                    .ToArray();
 
-            if (errors.Any())
-                throw new BadRequestException(errors);
+                if (errors.Any())
+                    throw new BadRequestException(errors);
 
             return await next();
         }

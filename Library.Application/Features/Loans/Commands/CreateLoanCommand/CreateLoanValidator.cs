@@ -6,9 +6,23 @@ namespace Library.Application.Features.Loans.Commands.CreateLoanCommand
     {
         public CreateLoanValidator()
         {
-            RuleFor(x => x.BookId).NotEmpty().NotNull();
-            RuleFor(x => x.UserId).NotEmpty().NotNull();
-            RuleFor(x => x.Date).NotEmpty().NotNull();
+            RuleFor(x => x.Id)
+               .NotEmpty().WithMessage("{PropertyName} is required.")
+               .NotNull().WithMessage("{PropertyName} is required.");
+
+            RuleFor(x => x.BookId)
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .NotNull().WithMessage("{PropertyName} is required.");
+
+
+            RuleFor(x => x.UserId)
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .NotNull().WithMessage("{PropertyName} is required.");
+
+
+            RuleFor(x => x.Date)
+                .NotEmpty().WithMessage("{PropertyName} is required.")
+                .LessThanOrEqualTo(DateTime.Now).WithMessage("Data must be less or equal to Today {DateTime.Now}");
         }
     }
 }

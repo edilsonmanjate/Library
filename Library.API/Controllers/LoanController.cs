@@ -8,6 +8,8 @@ using MediatR;
 
 using Microsoft.AspNetCore.Mvc;
 
+using System.Threading;
+
 namespace Library.API.Controllers
 {
     [ApiController]
@@ -51,11 +53,11 @@ namespace Library.API.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult> Create([FromBody] CreateLoanCommand command)
+        public async Task<ActionResult> Create([FromBody] CreateLoanCommand command, CancellationToken cancellationToken)
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(command, cancellationToken);
 
             if (response.Success)
             {
@@ -66,11 +68,11 @@ namespace Library.API.Controllers
         }
 
         [HttpPut("Update")]
-        public async Task<ActionResult> UpdateAsync([FromBody] UpdateLoanCommand command)
+        public async Task<ActionResult> UpdateAsync([FromBody] UpdateLoanCommand command, CancellationToken cancellationToken)
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(command,cancellationToken);
 
             if (response.Success)
             {
@@ -81,11 +83,11 @@ namespace Library.API.Controllers
         }
 
         [HttpPut("ReturnBook")]
-        public async Task<ActionResult> ReturnBook([FromBody] ReturnLoanCommand command)
+        public async Task<ActionResult> ReturnBook([FromBody] ReturnLoanCommand command, CancellationToken cancellationToken)
         {
             if (command is null) return BadRequest();
 
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(command, cancellationToken);
 
             if (response.Success)
             {
